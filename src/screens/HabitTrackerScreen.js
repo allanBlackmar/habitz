@@ -18,9 +18,9 @@ const HabitTrackerScreen = () => {
 
     return (
         <KeyboardAvoidingView style={styles.container} behavior="padding">
-            <View style={styles.titleContainer}>
-                <Text style={styles.title}>Habit Tracker</Text>
-            </View>
+            {/*<View style={styles.titleContainer}>*/}
+            {/*    <Text style={styles.title}>Habit Tracker</Text>*/}
+            {/*</View>*/}
 
             <View style={styles.inputContainer}>
                 <TextInput
