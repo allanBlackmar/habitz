@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, KeyboardAvoidingView, Text } from 'react-native';
 import HabitList from '../components/habitTracker/HabitList';
-import styles from '../../styles';
+import styles from '../style/styles';
 import {
     addHabit,
     removeHabit,
@@ -9,7 +9,7 @@ import {
     saveEditedHabit,
     markHabitCompleted,
 } from '../actions/habitTracker/HabitActions';
-import {MaterialIcons} from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const HabitTrackerScreen = () => {
     const [habits, setHabits] = useState([]);
@@ -19,52 +19,52 @@ const HabitTrackerScreen = () => {
 
     return (
         <KeyboardAvoidingView style={styles.container} behavior="padding">
-            {/*<View style={styles.titleContainer}>*/}
-            {/*    <Text style={styles.title}>Habit Tracker</Text>*/}
-            {/*</View>*/}
-
-            <View style={styles.inputContainer}>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Enter habit"
-                    value={newHabit}
-                    onChangeText={setNewHabit}
-                />
-                <TouchableOpacity
-                    style={styles.addButton}
-                    onPress={() => {
-                        addHabit(habits, setHabits, newHabit, setNewHabit);
+            <View style={styles.contentContainer}>
+                <HabitList
+                    habits={habits}
+                    onEdit={(habitId) => {
+                        editHabit(habits, setHabits, setEditingHabitId, setEditedHabitName, habitId);
                     }}
-                >
-                    <MaterialIcons name="add" size={24} color="#FFF" />
-                </TouchableOpacity>
+                    onRemove={(habitId) => {
+                        removeHabit(habits, setHabits, habitId);
+                    }}
+                    onToggleComplete={(habitId) => {
+                        markHabitCompleted(habits, setHabits, habitId);
+                    }}
+                    onEditSave={() => {
+                        saveEditedHabit(
+                            habits,
+                            setHabits,
+                            setEditingHabitId,
+                            setEditedHabitName,
+                            editingHabitId,
+                            editedHabitName
+                        );
+                    }}
+                    editingHabitId={editingHabitId}
+                    editedHabitName={editedHabitName}
+                    setEditedHabitName={setEditedHabitName}
+                />
+                <View style={styles.inputContainer}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Enter habit"
+                        value={newHabit}
+                        onChangeText={setNewHabit}
+                        onSubmitEditing={() => {
+                            addHabit(habits, setHabits, newHabit, setNewHabit);
+                        }}
+                    />
+                    <TouchableOpacity
+                        style={styles.addButton}
+                        onPress={() => {
+                            addHabit(habits, setHabits, newHabit, setNewHabit);
+                        }}
+                    >
+                        <MaterialIcons name="add" size={24} color="#FFF" />
+                    </TouchableOpacity>
+                </View>
             </View>
-
-            <HabitList
-                habits={habits}
-                onEdit={(habitId) => {
-                    editHabit(habits, setHabits, setEditingHabitId, setEditedHabitName, habitId);
-                }}
-                onRemove={(habitId) => {
-                    removeHabit(habits, setHabits, habitId);
-                }}
-                onToggleComplete={(habitId) => {
-                    markHabitCompleted(habits, setHabits, habitId);
-                }}
-                onEditSave={() => {
-                    saveEditedHabit(
-                        habits,
-                        setHabits,
-                        setEditingHabitId,
-                        setEditedHabitName,
-                        editingHabitId,
-                        editedHabitName
-                    );
-                }}
-                editingHabitId={editingHabitId}
-                editedHabitName={editedHabitName}
-                setEditedHabitName={setEditedHabitName}
-            />
         </KeyboardAvoidingView>
     );
 };

@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { HABITZ_DEFAULT } from "./color";
 
 const styles = StyleSheet.create({
     container: {
@@ -32,8 +33,12 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#333',
     },
+    contentContainer: {
+        flex: 1,
+        justifyContent: 'center',
+    },
     addButton: {
-        backgroundColor: '#008080',
+        backgroundColor: HABITZ_DEFAULT,
         padding: 8,
         borderRadius: 4,
         alignItems: 'center',
@@ -64,7 +69,7 @@ const styles = StyleSheet.create({
         marginTop: 8,
     },
     habitButton: {
-        backgroundColor: '#008080',
+        backgroundColor: HABITZ_DEFAULT,
         padding: 4,
         borderRadius: 4,
         alignItems: 'center',
@@ -90,7 +95,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
     },
     editButton: {
-        backgroundColor: '#008080',
+        backgroundColor: HABITZ_DEFAULT,
         padding: 4,
         borderRadius: 4,
         alignItems: 'center',
@@ -107,7 +112,6 @@ const styles = StyleSheet.create({
         color: '#999',
         // marginLeft: 8,
     },
-
     // Modal Styles
     modalContainer: {
         flex: 1,
@@ -141,7 +145,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
     },
     modalButton: {
-        backgroundColor: '#008080',
+        backgroundColor: HABITZ_DEFAULT,
         padding: 8,
         borderRadius: 4,
         alignItems: 'center',
@@ -184,14 +188,14 @@ const styles = StyleSheet.create({
         width: 24,
         height: 24,
         // borderWidth: 2,
-        // borderColor: '#008080',
+        // borderColor: HABITZ_DEFAULT,
         // borderRadius: 12,
         alignItems: 'center',
         justifyContent: 'center',
         marginRight: 8,
     },
     checkboxIcon: {
-        color: '#008080',
+        color: HABITZ_DEFAULT,
         fontSize: 28,
     },
     habitName: {

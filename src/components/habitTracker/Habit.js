@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import styles from '../../../styles';
+import styles from '../../style/styles';
 import { MaterialIcons } from '@expo/vector-icons';
 
 const Habit = ({ habit, onEdit, onRemove, onToggleComplete }) => {
