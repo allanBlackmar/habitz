@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import React, {useState} from 'react';
+import {Text, View, TextInput, TouchableOpacity} from 'react-native';
 import HabitList from './components/HabitList';
 import styles from './styles';
 import {
@@ -27,24 +27,25 @@ export default function App() {
                     value={newHabit}
                     onChangeText={setNewHabit}
                 />
-                <TouchableOpacity
-                    style={styles.addButton}
-                    onPress={() =>
-                        addHabit(habits, setHabits, newHabit, setNewHabit)
-                    }
-                >
+                <TouchableOpacity style={styles.addButton} onPress={() => {
+                    addHabit(habits, setHabits, newHabit, setNewHabit);
+                }}>
                     <Text style={styles.addButtonLabel}>Add</Text>
                 </TouchableOpacity>
             </View>
 
             <HabitList
                 habits={habits}
-                onEdit={(habitId) =>
-                    editHabit(habits, setHabits, setEditingHabitId, setEditedHabitName, habitId)
-                }
-                onRemove={(habitId) => removeHabit(habits, setHabits, habitId)}
-                onToggleComplete={(habitId) => markHabitCompleted(habits, setHabits, habitId)}
-                onEditSave={() =>
+                onEdit={(habitId) => {
+                    editHabit(habits, setHabits, setEditingHabitId, setEditedHabitName, habitId);
+                }}
+                onRemove={(habitId) => {
+                    removeHabit(habits, setHabits, habitId);
+                }}
+                onToggleComplete={(habitId) => {
+                    markHabitCompleted(habits, setHabits, habitId);
+                }}
+                onEditSave={() => {
                     saveEditedHabit(
                         habits,
                         setHabits,
@@ -52,12 +53,11 @@ export default function App() {
                         setEditedHabitName,
                         editingHabitId,
                         editedHabitName
-                    )
-                }
+                    );
+                }}
                 editingHabitId={editingHabitId}
                 editedHabitName={editedHabitName}
                 setEditedHabitName={setEditedHabitName}
-                setEditingHabitId={setEditingHabitId}
             />
         </View>
     );

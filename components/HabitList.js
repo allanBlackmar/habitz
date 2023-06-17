@@ -4,25 +4,21 @@ import PropTypes from 'prop-types';
 import Habit from './Habit';
 import styles from '../styles';
 
-const HabitList = ({ habits, onEdit, onRemove, onToggleComplete }) => {
-    const [editingHabitId, setEditingHabitId] = useState(null);
-    const [editedHabitName, setEditedHabitName] = useState('');
+const HabitList = ({ habits, onEdit, onRemove, onToggleComplete, onEditSave, editingHabitId, editedHabitName, setEditedHabitName }) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const openModal = (habitId, habitName) => {
-        setEditingHabitId(habitId);
-        setEditedHabitName(habitName);
+        onEdit(habitId);
         setIsModalVisible(true);
     };
 
     const closeModal = () => {
         setIsModalVisible(false);
-        setEditingHabitId(null);
         setEditedHabitName('');
     };
 
     const saveEditedHabit = () => {
-        onEdit(editingHabitId, editedHabitName);
+        onEditSave();
         closeModal();
     };
 
@@ -82,6 +78,10 @@ HabitList.propTypes = {
     onEdit: PropTypes.func.isRequired,
     onRemove: PropTypes.func.isRequired,
     onToggleComplete: PropTypes.func.isRequired,
+    onEditSave: PropTypes.func.isRequired,
+    editingHabitId: PropTypes.string,
+    editedHabitName: PropTypes.string,
+    setEditedHabitName: PropTypes.func.isRequired,
 };
 
 export default HabitList;
