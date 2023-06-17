@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native';
 import styles from '../style/styles';
 
-const SettingsScreen = () => {
+const StatsScreen = () => {
     return (
         <View style={styles.titleContainer}>
-            <Text style={styles.title}>Settings</Text>
+            <Text style={styles.title}>Stats</Text>
         </View>
     );
 };
 
-export default SettingsScreen;
+export default StatsScreen;

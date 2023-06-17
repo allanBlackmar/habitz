@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FlatList, Modal, ScrollView, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import PropTypes from 'prop-types';
 import Habit from './Habit';
-import styles from '../../../styles';
+import styles from '../../style/styles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
@@ -72,7 +72,7 @@ const HabitList = ({
                                     name="check-box"
                                     size={20}
                                     style={styles.checkboxIcon}
-                                    color="#008080"
+                                    color="#87CEEB"
                                 />
                             </TouchableOpacity>
                         ) : (
@@ -84,7 +84,7 @@ const HabitList = ({
                                     name="check-box-outline-blank"
                                     size={20}
                                     style={styles.checkboxIcon}
-                                    color="#008080"
+                                    color="#87CEEB"
                                 />
                             </TouchableOpacity>
                         )}
