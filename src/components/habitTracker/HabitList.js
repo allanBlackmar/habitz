@@ -1,10 +1,19 @@
-import React, { useState } from 'react';
-import { FlatList, Modal, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import React, {useState} from 'react';
+import {FlatList, Modal, ScrollView, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import PropTypes from 'prop-types';
 import Habit from './Habit';
-import styles from '../styles';
+import styles from '../../../styles';
 
-const HabitList = ({ habits, onEdit, onRemove, onToggleComplete, onEditSave, editingHabitId, editedHabitName, setEditedHabitName }) => {
+const HabitList = ({
+                       habits,
+                       onEdit,
+                       onRemove,
+                       onToggleComplete,
+                       onEditSave,
+                       editingHabitId,
+                       editedHabitName,
+                       setEditedHabitName
+                   }) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const openModal = (habitId, habitName) => {
@@ -22,14 +31,42 @@ const HabitList = ({ habits, onEdit, onRemove, onToggleComplete, onEditSave, edi
         closeModal();
     };
 
-    const renderHabit = ({ item }) => (
-        <Habit
-            habit={item}
-            onEdit={() => openModal(item.id, item.name)}
-            onRemove={onRemove}
-            onToggleComplete={onToggleComplete}
-        />
-    );
+    const renderHabit = ({item}) => {
+        if (item.completed) {
+            return null;
+        }
+
+        return (
+            <Habit
+                habit={item}
+                onEdit={() => openModal(item.id, item.name)}
+                onRemove={onRemove}
+                onToggleComplete={onToggleComplete}
+            />
+        );
+    };
+
+    const renderCompletedHabits = () => {
+        const completedHabits = habits.filter((habit) => habit.completed);
+
+        if (completedHabits.length === 0) {
+            return null;
+        }
+        return (
+            <ScrollView style={styles.completedHabitList}>
+            <Text style={styles.emptyText}>Completed habits</Text>
+            {completedHabits.map((habit) => (
+                <Habit
+                    key={habit.id}
+                    habit={habit}
+                    onEdit={() => openModal(habit.id, habit.name)}
+                    onRemove={onRemove}
+                    onToggleComplete={onToggleComplete}
+                />
+            ))}
+            </ScrollView>
+        )
+    };
 
     return (
         <>
@@ -43,6 +80,7 @@ const HabitList = ({ habits, onEdit, onRemove, onToggleComplete, onEditSave, edi
                     style={styles.habitList}
                 />
             )}
+            {renderCompletedHabits()}
 
             <Modal visible={isModalVisible} animationType="slide" transparent>
                 <View style={styles.modalContainer}>

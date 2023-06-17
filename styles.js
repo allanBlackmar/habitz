@@ -4,6 +4,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#F5F5F5',
+        justifyContent: 'center', // Center elements vertically
         padding: 16,
     },
     title: {
@@ -11,6 +12,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 16,
         color: '#333',
+        textAlign: 'center', // Center the text
+    },
+    titleContainer: {
+        marginTop: 28, // Add margin bottom to move the title down
+        marginBottom: 28, // Add margin bottom to move the title down
     },
     inputContainer: {
         flexDirection: 'row',
@@ -139,6 +145,22 @@ const styles = StyleSheet.create({
         color: '#FFF',
         fontSize: 16,
         fontWeight: 'bold',
+    },
+    disabledButton: {
+        backgroundColor: '#999',
+    },
+    habitContent: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    completedHabitList: {
+        maxHeight: 200, // Adjust the maximum height as needed
+        marginTop: 16,
+        marginBottom: 16,
+        backgroundColor: '#FFF',
+        borderRadius: 8,
+        padding: 16,
     },
 });
 
