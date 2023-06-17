@@ -16,7 +16,7 @@ const HabitList = ({
                        editedHabitName,
                        setEditedHabitName
                    }) => {
-    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [isEditModalVisible, setIsEditModalVisible] = useState(false);
     const [isCompletedHabitVisible, setIsCompletedHabitVisible] = useState(true);
     const toggleCompletedHabitVisibility = () => {
         setIsCompletedHabitVisible(!isCompletedHabitVisible);
@@ -25,11 +25,11 @@ const HabitList = ({
 
     const openModal = (habitId, habitName) => {
         onEdit(habitId);
-        setIsModalVisible(true);
+        setIsEditModalVisible(true);
     };
 
     const closeModal = () => {
-        setIsModalVisible(false);
+        setIsEditModalVisible(false);
         setEditedHabitName('');
     };
 
@@ -43,51 +43,48 @@ const HabitList = ({
         }
 
         return (
-            <ScrollView style={styles.habit}>
-                <View style={styles.habitContent}>
-                    {item.completed ? (
-                        <TouchableOpacity
-                            style={styles.checkbox}
-                            onPress={() => onToggleComplete(item.id)}
-                        >
-                            <MaterialIcons
-                                name="check-box"
-                                size={20}
-                                style={styles.checkboxIcon}
-                                color="#008080"
-                            />
-                        </TouchableOpacity>
-                    ) : (
-                        <TouchableOpacity
-                            style={styles.checkbox}
-                            onPress={() => onToggleComplete(item.id)}
-                        >
-                            <MaterialIcons
-                                name="check-box-outline-blank"
-                                size={20}
-                                style={styles.checkboxIcon}
-                                color="#008080"
-                            />
-                        </TouchableOpacity>
-                    )}
-                    <Text style={styles.habitName}>{item.name}</Text>
-                    <View style={styles.habitButtons}>
-                        <TouchableOpacity
-                            style={styles.habitButton}
-                            onPress={() => onEdit(item.id)}
-                            disabled={item.completed}
-                        >
-                            <Text style={styles.habitButtonLabel}>Edit</Text>
-                        </TouchableOpacity>
+            <TouchableOpacity onPress={() => openModal(item.id, item.name)}>
+                <ScrollView style={styles.habit}>
+                    <View style={styles.habitContent}>
+                        {item.completed ? (
+                            <TouchableOpacity
+                                style={styles.checkbox}
+                                onPress={() => onToggleComplete(item.id)}
+                            >
+                                <MaterialIcons
+                                    name="check-box"
+                                    size={20}
+                                    style={styles.checkboxIcon}
+                                    color="#008080"
+                                />
+                            </TouchableOpacity>
+                        ) : (
+                            <TouchableOpacity
+                                style={styles.checkbox}
+                                onPress={() => onToggleComplete(item.id)}
+                            >
+                                <MaterialIcons
+                                    name="check-box-outline-blank"
+                                    size={20}
+                                    style={styles.checkboxIcon}
+                                    color="#008080"
+                                />
+                            </TouchableOpacity>
+                        )}
+                        <Text style={styles.habitName}>{item.name}</Text>
                         <TouchableOpacity
                             style={styles.habitButton}
                             onPress={() => onRemove(item.id)}
                         >
-                            <Text style={styles.habitButtonLabel}>Remove</Text>
+                            <MaterialIcons
+                                name="delete"
+                                size={20}
+                                color="#FFF"
+                            />
                         </TouchableOpacity>
                     </View>
-                </View>
-            </ScrollView>
+                </ScrollView>
+            </TouchableOpacity>
         );
     };
 
@@ -156,7 +153,7 @@ const HabitList = ({
             }
             {renderCompletedHabits()}
 
-            <Modal visible={isModalVisible} animationType="slide" transparent>
+            <Modal visible={isEditModalVisible} animationType="slide" transparent>
                 <View style={styles.modalContainer}>
                     <View style={styles.modalContent}>
                         <TextInput
