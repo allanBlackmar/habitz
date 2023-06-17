@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "18d21532-39f1-4ffd-bbe0-e8b33f9bf03a"
+      }
+    },
+    "owner": "saucyrips"
   }
 }
