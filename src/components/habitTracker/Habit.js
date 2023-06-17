@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import styles from '../../../styles';
+import { MaterialIcons } from '@expo/vector-icons';
 
 const Habit = ({ habit, onEdit, onRemove, onToggleComplete }) => {
     const handleToggleComplete = () => {
@@ -10,7 +11,7 @@ const Habit = ({ habit, onEdit, onRemove, onToggleComplete }) => {
 
     const handleEdit = () => {
         if (!habit.completed) {
-          onEdit(habit.id);
+            onEdit(habit.id);
         }
     };
 
@@ -21,10 +22,42 @@ const Habit = ({ habit, onEdit, onRemove, onToggleComplete }) => {
     return (
         <View style={styles.habit}>
             <View style={styles.habitContent}>
-                <Text style={habit.completed ? styles.completedHabitText : null}>{habit.name}</Text>
+                {habit.completed ? (
+                    <TouchableOpacity
+                        style={styles.checkbox}
+                        onPress={handleToggleComplete}
+                    >
+                        <MaterialIcons
+                            name="check-box"
+                            size={20}
+                            style={styles.checkboxIcon}
+                            color="#FFF"
+                        />
+                    </TouchableOpacity>
+                ) : (
+                    <TouchableOpacity
+                        style={styles.checkbox}
+                        onPress={handleToggleComplete}
+                    >
+                        <MaterialIcons
+                            name="check-box-outline-blank"
+                            size={20}
+                            style={styles.checkboxIcon}
+                            color="#FFF"
+                        />
+                    </TouchableOpacity>
+                )}
+                <Text
+                    style={[
+                        styles.habitName,
+                        habit.completed && styles.completedHabitText, // Add the completedHabitText style when habit is completed
+                    ]}
+                >
+                    {habit.name}
+                </Text>
                 <View style={styles.habitButtons}>
                     <TouchableOpacity
-                        style={[styles.habitButton, habit.completed && styles.disabledButton ]}
+                        style={styles.habitButton}
                         onPress={handleEdit}
                         disabled={habit.completed}
                     >
@@ -32,11 +65,6 @@ const Habit = ({ habit, onEdit, onRemove, onToggleComplete }) => {
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.habitButton} onPress={handleRemove}>
                         <Text style={styles.habitButtonLabel}>Remove</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.habitButton} onPress={handleToggleComplete}>
-                        <Text style={styles.habitButtonLabel}>
-                            {habit.completed ? 'Undo' : 'Complete'}
-                        </Text>
                     </TouchableOpacity>
                 </View>
             </View>

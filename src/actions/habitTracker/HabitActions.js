@@ -1,3 +1,5 @@
+import {Keyboard} from "react-native";
+
 export const addHabit = (habits, setHabits, newHabit, setNewHabit) => {
     if (newHabit.trim() === '') {
         return; // Ignore empty habit
@@ -11,6 +13,7 @@ export const addHabit = (habits, setHabits, newHabit, setNewHabit) => {
 
     setHabits([...habits, habit]);
     setNewHabit('');
+    Keyboard.dismiss()
 };
 
 export const removeHabit = (habits, setHabits, habitId) => {

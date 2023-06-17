@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         alignItems: 'center',
         justifyContent: 'center',
-        marginLeft: 8,
+        marginRight: 8,
     },
     habitButtonLabel: {
         color: '#FFF',
@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
     completedHabitText: {
         textDecorationLine: 'line-through',
         color: '#999',
+        // marginLeft: 8,
     },
 
     // Modal Styles
@@ -124,6 +125,12 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#999',
         borderRadius: 4,
+        padding: 8,
+        marginBottom: 8,
+        fontSize: 16,
+        color: '#333',
+    },
+    modalText: {
         padding: 8,
         marginBottom: 8,
         fontSize: 16,
@@ -150,18 +157,54 @@ const styles = StyleSheet.create({
         backgroundColor: '#999',
     },
     habitContent: {
+        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
     },
     completedHabitList: {
-        maxHeight: 200, // Adjust the maximum height as needed
+        flex: 1,
         marginTop: 16,
         marginBottom: 16,
         backgroundColor: '#FFF',
         borderRadius: 8,
-        padding: 16,
+        padding: 12,
+        alignSelf: 'stretch', // Align to fill available width
+        flexGrow: 1, // Allow the list to grow vertically
+        overflow: 'scroll', // Enable scrolling when the list exceeds available space
     },
+    completedHabitToggle: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 8,
+        marginTop: 16,
+    },
+    checkbox: {
+        width: 24,
+        height: 24,
+        // borderWidth: 2,
+        // borderColor: '#008080',
+        // borderRadius: 12,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginRight: 8,
+    },
+    checkboxIcon: {
+        color: '#008080',
+        fontSize: 28,
+    },
+    habitName: {
+        flex: 1, // Expand to fill remaining space
+        marginLeft: 8, // Add margin to separate from the checkbox
+        fontSize: 16,
+        color: '#333',
+    },
+    scrollIndicatorText: {
+        textAlign: 'center',
+        color: '#999',
+        marginTop: 8,
+    }
 });
 
 export default styles;

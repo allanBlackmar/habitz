@@ -9,6 +9,7 @@ import {
     saveEditedHabit,
     markHabitCompleted,
 } from '../actions/habitTracker/HabitActions';
+import {MaterialIcons} from "@expo/vector-icons";
 
 const HabitTrackerScreen = () => {
     const [habits, setHabits] = useState([]);
@@ -18,9 +19,9 @@ const HabitTrackerScreen = () => {
 
     return (
         <KeyboardAvoidingView style={styles.container} behavior="padding">
-            <View style={styles.titleContainer}>
-                <Text style={styles.title}>Habit Tracker</Text>
-            </View>
+            {/*<View style={styles.titleContainer}>*/}
+            {/*    <Text style={styles.title}>Habit Tracker</Text>*/}
+            {/*</View>*/}
 
             <View style={styles.inputContainer}>
                 <TextInput
@@ -35,7 +36,7 @@ const HabitTrackerScreen = () => {
                         addHabit(habits, setHabits, newHabit, setNewHabit);
                     }}
                 >
-                    <Text style={styles.addButtonLabel}>Add</Text>
+                    <MaterialIcons name="add" size={24} color="#FFF" />
                 </TouchableOpacity>
             </View>
 
