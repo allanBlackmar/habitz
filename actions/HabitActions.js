@@ -24,7 +24,6 @@ export const editHabit = (
     setEditedHabitName,
     habitId
 ) => {
-    console.log('Hello')
     const habitToEdit = habits.find((habit) => habit.id === habitId);
     if (habitToEdit) {
         setEditingHabitId(habitId);
