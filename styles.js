@@ -130,6 +130,12 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#333',
     },
+    modalText: {
+        padding: 8,
+        marginBottom: 8,
+        fontSize: 16,
+        color: '#333',
+    },
     modalButtons: {
         flexDirection: 'row',
         justifyContent: 'flex-end',
