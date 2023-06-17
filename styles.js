@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     completedHabitText: {
         textDecorationLine: 'line-through',
         color: '#999',
-        marginLeft: 8,
+        // marginLeft: 8,
     },
 
     // Modal Styles

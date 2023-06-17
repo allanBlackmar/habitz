@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import styles from '../../../styles';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -47,7 +47,14 @@ const Habit = ({ habit, onEdit, onRemove, onToggleComplete }) => {
                         />
                     </TouchableOpacity>
                 )}
-                <Text style={styles.habitName}>{habit.name}</Text>
+                <Text
+                    style={[
+                        styles.habitName,
+                        habit.completed && styles.completedHabitText, // Add the completedHabitText style when habit is completed
+                    ]}
+                >
+                    {habit.name}
+                </Text>
                 <View style={styles.habitButtons}>
                     <TouchableOpacity
                         style={styles.habitButton}
