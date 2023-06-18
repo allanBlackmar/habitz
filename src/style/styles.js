@@ -219,6 +219,30 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         // Add more styles as needed
     },
+    searchButton: {
+        backgroundColor: HABITZ_DEFAULT,
+        padding: 10,
+        borderRadius: 5,
+        marginBottom: 10,
+        alignSelf: 'flex-start',
+    },
+
+    searchContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 10,
+    },
+    searchInput: {
+        flex: 1,
+        height: 40,
+        borderColor: '#ccc',
+        // borderWidth: 1,
+        // borderRadius: 5,
+        // paddingHorizontal: 10,
+        marginLeft: 20,
+        marginBottom: 8
+    },
+
 });
 
 export default styles;
