@@ -20,8 +20,10 @@ const styles = StyleSheet.create({
         marginBottom: 28, // Add margin bottom to move the title down
     },
     inputContainer: {
+        flex: 1,
         flexDirection: 'row',
         marginBottom: 16,
+        maxHeight: 40
     },
     input: {
         flex: 1,
@@ -51,8 +53,10 @@ const styles = StyleSheet.create({
     },
     emptyText: {
         fontSize: 18,
-        fontStyle: 'italic',
-        color: '#999',
+        fontWeight: 'bold',
+        marginTop: 10,
+        marginBottom: 10,
+        color: HABITZ_DEFAULT
     },
     habitList: {
         flex: 1,
@@ -208,7 +212,13 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#999',
         marginTop: 8,
-    }
+    },
+    completedHabitToggleText: {
+        fontSize: 16,
+        color: HABITZ_DEFAULT,
+        fontWeight: 'bold',
+        // Add more styles as needed
+    },
 });
 
 export default styles;

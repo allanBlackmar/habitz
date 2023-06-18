@@ -18,7 +18,7 @@ const HabitTrackerScreen = () => {
     const [editedHabitName, setEditedHabitName] = useState('');
 
     return (
-        <KeyboardAvoidingView style={styles.container} behavior="padding">
+        <KeyboardAvoidingView style={styles.container} behavior="padding" keyboardVerticalOffset={100}>
             <View style={styles.contentContainer}>
                 <HabitList
                     habits={habits}
