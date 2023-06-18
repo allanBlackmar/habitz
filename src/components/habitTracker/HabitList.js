@@ -21,9 +21,15 @@ const HabitList = ({
     const [isDeleteHabitModalVisible, setIsDeleteHabitModalVisible] = useState(false);
     const [habitToDelete, setHabitToDelete] = useState(null);
     const [isCompletedHabitVisible, setIsCompletedHabitVisible] = useState(true);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [isSearchVisible, setIsSearchVisible] = useState(false);
 
-    const toggleCompletedHabitVisibility = () => {
-        setIsCompletedHabitVisible(!isCompletedHabitVisible);
+    const toggleSearchBar = () => {
+        setIsSearchVisible(!isSearchVisible);
+    };
+
+    const toggleCompletedHabitVisibility = (visible) => {
+        setIsCompletedHabitVisible(visible);
     };
 
     const openEditModal = (habitId, habitName) => {
@@ -55,8 +61,13 @@ const HabitList = ({
         closeDeleteConfirmationModal();
     };
 
+
+    const handleSearch = (text) => {
+        setSearchQuery(text);
+    };
+
     const renderHabit = ({ item }) => {
-        if (item.completed) {
+        if (item.completed || !item.name.toLowerCase().includes(searchQuery.toLowerCase())) {
             return null;
         }
 
@@ -105,31 +116,40 @@ const HabitList = ({
     const renderCompletedHabits = () => {
         const completedHabits = habits.filter((habit) => habit.completed);
 
+        const filteredCompletedHabits = completedHabits.filter((habit) =>
+            habit.name.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+
         if (completedHabits.length === 0) {
             return null;
         }
+
+        const completedHabitsVisible =
+            isCompletedHabitVisible || (searchQuery !== '' && filteredCompletedHabits.length > 0);
+
+        const toggleCompletedHabitsVisibility = () => {
+            setIsCompletedHabitVisible(!isCompletedHabitVisible);
+        };
 
         return (
             <>
                 <TouchableOpacity
                     style={styles.completedHabitToggle}
-                    onPress={toggleCompletedHabitVisibility}
+                    onPress={toggleCompletedHabitsVisibility}
                 >
                     <AntDesign
                         name={isCompletedHabitVisible ? 'caretdown' : 'caretup'}
                         size={24}
-                        color={HABITZ_DEFAULT} />
+                        color={HABITZ_DEFAULT}
+                    />
                     <Text style={styles.completedHabitToggleText}>
                         {isCompletedHabitVisible ? 'Hide Completed Habits' : 'Show Completed Habits'}
                     </Text>
                 </TouchableOpacity>
-                {isCompletedHabitVisible && (
-                    <ScrollView
-                        style={styles.completedHabitList}
-                        showsVerticalScrollIndicator={true}
-                    >
+                {completedHabitsVisible && (
+                    <ScrollView style={styles.completedHabitList} showsVerticalScrollIndicator={true}>
                         <Text style={styles.emptyText}>Completed habits</Text>
-                        {completedHabits.map((habit) => (
+                        {filteredCompletedHabits.map((habit) => (
                             <Habit
                                 key={habit.id}
                                 habit={habit}
@@ -143,12 +163,30 @@ const HabitList = ({
         );
     };
 
+    // habits.length > 0 && (habits.filter(habit => !habit.completed).length > 0 || isCompletedHabitVisible
     return (
         <>
+            <View style={styles.searchContainer}>
+                {habits.length > 0 && (
+                    <View style={styles.searchContainer}>
+                        <TouchableOpacity style={styles.searchButton}>
+                            <MaterialIcons name="search" size={24} color="#FFF" />
+                        </TouchableOpacity>
+                        {(
+                            <TextInput
+                                style={styles.searchInput}
+                                placeholder="Search habits..."
+                                value={searchQuery}
+                                onChangeText={setSearchQuery}
+                            />
+                        )}
+                    </View>
+                )}
+            </View>
             {habits.length === 0 ? (
                 <Text style={styles.emptyText}>Enter your habits to start tracking them!</Text>
             ) : (
-                <Text style={styles.emptyText}>Todays Habits:</Text>
+                <Text style={styles.emptyText}>Today's Habits:</Text>
             )}
             <FlatList
                 data={habits}
