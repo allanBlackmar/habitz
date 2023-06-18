@@ -56,15 +56,23 @@ const Habit = ({ habit, onEdit, onRemove, onToggleComplete }) => {
                     {habit.name}
                 </Text>
                 <View style={styles.habitButtons}>
+                    {onEdit && !habit.completed && (
+                        <TouchableOpacity
+                            style={styles.habitButton}
+                            onPress={handleEdit}
+                        >
+                            <Text style={styles.habitButtonLabel}>Edit</Text>
+                        </TouchableOpacity>
+                    )}
                     <TouchableOpacity
                         style={styles.habitButton}
-                        onPress={handleEdit}
-                        disabled={habit.completed}
+                        onPress={handleRemove}
                     >
-                        <Text style={styles.habitButtonLabel}>Edit</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.habitButton} onPress={handleRemove}>
-                        <Text style={styles.habitButtonLabel}>Remove</Text>
+                        <MaterialIcons
+                            name="delete"
+                            size={20}
+                            color="#FFF"
+                        />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -78,7 +86,7 @@ Habit.propTypes = {
         name: PropTypes.string.isRequired,
         completed: PropTypes.bool.isRequired,
     }).isRequired,
-    onEdit: PropTypes.func.isRequired,
+    onEdit: PropTypes.func,
     onRemove: PropTypes.func.isRequired,
     onToggleComplete: PropTypes.func.isRequired,
 };

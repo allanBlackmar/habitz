@@ -5,6 +5,7 @@ import Habit from './Habit';
 import styles from '../../style/styles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import {HABITZ_DEFAULT} from "../../style/color";
 
 const HabitList = ({
                        habits,
@@ -114,19 +115,24 @@ const HabitList = ({
                     style={styles.completedHabitToggle}
                     onPress={toggleCompletedHabitVisibility}
                 >
-                    <AntDesign name={isCompletedHabitVisible ? 'caretdown' : 'caretup'} size={24} color="#333" />
+                    <AntDesign
+                        name={isCompletedHabitVisible ? 'caretdown' : 'caretup'}
+                        size={24}
+                        color={HABITZ_DEFAULT} />
                     <Text style={styles.completedHabitToggleText}>
                         {isCompletedHabitVisible ? 'Hide Completed Habits' : 'Show Completed Habits'}
                     </Text>
                 </TouchableOpacity>
                 {isCompletedHabitVisible && (
-                    <ScrollView style={styles.completedHabitList} showsVerticalScrollIndicator={true}>
+                    <ScrollView
+                        style={styles.completedHabitList}
+                        showsVerticalScrollIndicator={true}
+                    >
                         <Text style={styles.emptyText}>Completed habits</Text>
                         {completedHabits.map((habit) => (
                             <Habit
                                 key={habit.id}
                                 habit={habit}
-                                onEdit={() => openEditModal(habit.id, habit.name)}
                                 onRemove={() => openDeleteConfirmationModal(habit.id)}
                                 onToggleComplete={onToggleComplete}
                             />
